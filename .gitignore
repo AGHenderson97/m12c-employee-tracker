@@ -1,0 +1,5 @@
+# Ignore node_modules folder
+node_modules/
+
+# Ignore .env file if you choose to use it for storing sensitive information
+.env
