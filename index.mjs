@@ -6,9 +6,9 @@ import { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addR
 const connection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
-  user: 'username_m9c',
-  password: 'password_m9c',
-  database: 'database_m9c',
+  user: 'username_m12c',
+  password: 'password_m12c',
+  database: 'database_m12c',
 });
 
 // Connect to the database
