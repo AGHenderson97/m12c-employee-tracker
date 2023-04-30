@@ -1,20 +1,27 @@
-// Import required packages and modules
 import inquirer from 'inquirer';
-import connection from './connection.mjs';
-import {
-  viewAllDepartments,
-  viewAllRoles,
-  viewAllEmployees,
-  addDepartment,
-  addRole,
-  addEmployee,
-  updateEmployeeRole,
-} from './queries.mjs';
+import mysql from 'mysql2';
+import { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole } from './queries.mjs';
 
-// Function to prompt the user for an action
-async function mainMenu() {
-  const { action } = await inquirer.prompt([
-    {
+// Create a connection to the MySQL database
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'your_mysql_password',
+  database: 'your_database_name',
+});
+
+// Connect to the database
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to the database.');
+  runApp();
+});
+
+// Function to prompt the user to choose an action
+function runApp() {
+  inquirer
+    .prompt({
       type: 'list',
       name: 'action',
       message: 'What would you like to do?',
@@ -28,52 +35,34 @@ async function mainMenu() {
         'Update an employee role',
         'Exit',
       ],
-    },
-  ]);
-
-  switch (action) {
-    case 'View all departments':
-      await viewAllDepartments(connection);
-      break;
-    case 'View all roles':
-      await viewAllRoles(connection);
-      break;
-    case 'View all employees':
-      await viewAllEmployees(connection);
-      break;
-    case 'Add a department':
-      await addDepartment(connection);
-      break;
-    case 'Add a role':
-      await addRole(connection);
-      break;
-    case 'Add an employee':
-      await addEmployee(connection);
-      break;
-    case 'Update an employee role':
-      await updateEmployeeRole(connection);
-      break;
-    case 'Exit':
-      console.log('Goodbye!');
-      process.exit(0);
-      break;
-    default:
-      console.log('Invalid action');
-      break;
-  }
-
-  // Return to the main menu
-  mainMenu();
+    })
+    .then((answer) => {
+      switch (answer.action) {
+        case 'View all departments':
+          viewAllDepartments(connection, runApp);
+          break;
+        case 'View all roles':
+          viewAllRoles(connection, runApp);
+          break;
+        case 'View all employees':
+          viewAllEmployees(connection, runApp);
+          break;
+        case 'Add a department':
+          addDepartment(connection, runApp);
+          break;
+        case 'Add a role':
+          addRole(connection, runApp);
+          break;
+        case 'Add an employee':
+          addEmployee(connection, runApp);
+          break;
+        case 'Update an employee role':
+          updateEmployeeRole(connection, runApp);
+          break;
+        case 'Exit':
+          console.log('Goodbye!');
+          connection.end();
+          break;
+      }
+    });
 }
-
-// Connect to the database and start the main menu
-(async () => {
-  try {
-    await connection.connect();
-    console.log('Connected to the database');
-    mainMenu();
-  } catch (error) {
-    console.error('Error connecting to the database:', error);
-    process.exit(1);
-  }
-})();
