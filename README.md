@@ -28,7 +28,8 @@ The Employee Tracker is a command-line application that allows a business owner 
 
 ## Usage
 
-To start the application, navigate to the project directory in the command line and run:
+To run your Node.js application with the experimental flag, use the following command: `node --experimental index.mjs`
+
 
 
 Follow the command-line prompts to view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role.
