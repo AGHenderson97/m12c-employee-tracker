@@ -36,7 +36,7 @@ Follow the command-line prompts to view all departments, view all roles, view al
 
 ## Walkthrough Video
 
-A walkthrough video demonstrating the application's functionality can be found [here](INSERT_LINK_TO_VIDEO).
+A walkthrough video demonstrating the application's functionality can be found [here](https://drive.google.com/file/d/1lrfrSqBbZVTgAqeMcmi_ukx_iuzKTCG_/view?usp=sharing).
 
 ## License
 
