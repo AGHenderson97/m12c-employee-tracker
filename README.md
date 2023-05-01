@@ -21,7 +21,7 @@ The Employee Tracker is a command-line application that allows a business owner 
 ## Installation
 
 1. Clone this repository.
-2. Navigate to the project directory and run `node --experimental-modules index.mjs` to install the required dependencies.
+2. Navigate to the project directory and run `nmp install` to install the required dependencies.
 3. Set up your MySQL database using the provided `schema.sql` file.
 4. (Optional) Seed your database with sample data using the provided `seeds.sql` file.
 5. Update the `connection.mjs` file with your MySQL database credentials.
